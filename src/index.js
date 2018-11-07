@@ -1,8 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import { render } from 'react-dom';
+import App from './components/App';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// importing bulma css framework syling
+import 'bulma/css/bulma.css'
+
+render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
