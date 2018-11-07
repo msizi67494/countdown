@@ -1,11 +1,27 @@
 import React,{ Component } from 'react'
+// import moment = require('moment');
+import moment from 'moment';
 
 class Countdown extends Component {
 
-    constructor(){
+    constructor(props){
+        super(props)
 
+        this.state = {
+            interval: this.getRemainingTime()
+        }
     }
-    
+    // method to calculate the remaining year
+    getRemainingTime(){
+        let now = moment(),
+         newYear = moment({year: now.year() + 1}),
+         diff = newYear.diff(now);
+
+         return moment.duration(diff)
+        // console.log(diff)
+    }
+
+
     render(){
         return (
             <div>
