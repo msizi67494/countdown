@@ -9,41 +9,61 @@ class Countdown extends Component {
 
         this.state = {
             duration: this.getRemainingTime(),
-            pause: false
+            paused: false
         }
+
+        this.togglePaused = this.togglePaused.bind(this)
     }
     // method to calculate the remaining time in a year
-    getRemainingTime(){
+     getRemainingTime() {
         let now = moment(),
          newYear = moment({year: now.year() + 1}),
          diff = newYear.diff(now);
 
          return moment.duration(diff)
-        // console.log(diff)
     }
 
+     // handling pause and resume 
+     togglePaused(){
+         
+        this.setState((prevState, props) => {
+            const paused = !prevState.paused
+
+            if (paused) {
+                clearInterval(this.interval);
+            } else {
+                setInterval(() => {
+                    this.setState({
+                       duration: this.getRemainingTime()
+                    })
+                }, 1000)
+            }
+            return {
+                paused
+            }
+        })
+       
+    }
+
+
     componentDidMount(){
-         let interval = setInterval(() => {
+        this.interval =  setInterval(() => {
              this.setState({
                 duration: this.getRemainingTime()
              })
          }, 1000)
     }
-
+    // disposing the interval when the component is being disposed 
     componentWillUnmount(){
-        clearInterval(this.interval)
+      clearInterval(this.interval);
     }
+   
 
-    togglePaused(){
-        this.setState({
-            pause: !this.state.pause
-        })
-    }
 
 
     render(){
         // destructuring duration from the state
-         const { duration, pause } = this.state
+         const { duration, paused} = this.state
 
         return (
             <div>
@@ -82,7 +102,10 @@ class Countdown extends Component {
                                 </nav>
                              </div>
                              <div>
-                                <Controls pause={pause}/>
+                                <Controls
+                                  paused={paused} 
+                                  onPausedToggle={this.togglePaused}
+                                 />
                              </div>
                              
                             <div>

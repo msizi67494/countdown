@@ -1,14 +1,14 @@
 import React from 'react'
 
-const Controls = ({pause}) =>
+const Controls = ({paused, onPausedToggle}) =>
     <div className="field is-grouped is-grouped-centered">
         <p className="control">
-            <button className="button is-rounded is-outlined is-danger medium" disabled={pause}>
+            <button className="button is-rounded is-outlined is-danger medium" disabled={paused} onClick={onPausedToggle}>
                 Pause
             </button>
         </p>
         <p className="control">
-            <button style={{marginLeft: 40}} className="button is-rounded is-outlined is-success medium" disabled={!pause}>
+             <button className="button is-rounded is-outlined is-success medium" disabled={!paused} onClick={onPausedToggle}>
                 Resume
             </button>
         </p>
