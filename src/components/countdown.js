@@ -9,10 +9,10 @@ class Countdown extends Component {
 
         this.state = {
             duration: this.getRemainingTime(),
-            paused: false
+            paused: false,
+           
         }
-
-        this.togglePaused = this.togglePaused.bind(this)
+       
     }
     // method to calculate the remaining time in a year
      getRemainingTime() {
@@ -24,7 +24,7 @@ class Countdown extends Component {
     }
 
      // handling pause and resume 
-     togglePaused(){
+     handleTogglePaused = () => {
          
         this.setState((prevState, props) => {
             const paused = !prevState.paused
@@ -32,7 +32,7 @@ class Countdown extends Component {
             if (paused) {
                 clearInterval(this.interval);
             } else {
-                setInterval(() => {
+           this.interval = setInterval(() => {
                     this.setState({
                        duration: this.getRemainingTime()
                     })
@@ -47,11 +47,11 @@ class Countdown extends Component {
 
 
     componentDidMount(){
-        this.interval =  setInterval(() => {
+        this.interval = setInterval(() => {
              this.setState({
                 duration: this.getRemainingTime()
              })
-         }, 1000)
+            }, 1000)
     }
     // disposing the interval when the component is being disposed 
     componentWillUnmount(){
@@ -104,7 +104,7 @@ class Countdown extends Component {
                              <div>
                                 <Controls
                                   paused={paused} 
-                                  onPausedToggle={this.togglePaused}
+                                  onPausedToggle={this.handleTogglePaused}
                                  />
                              </div>
                              
