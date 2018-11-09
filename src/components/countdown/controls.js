@@ -3,12 +3,16 @@ import React from 'react'
 const Controls = ({paused, onPausedToggle}) =>
     <div className="field is-grouped is-grouped-centered">
         <p className="control">
-            <button className="button is-rounded is-outlined is-danger medium" disabled={paused} onClick={onPausedToggle}>
+            <button className="button is-rounded is-outlined is-danger medium"
+                     disabled={paused}
+                     onClick={onPausedToggle}>
                 Pause
             </button>
         </p>
         <p className="control">
-             <button className="button is-rounded is-outlined is-success medium" disabled={!paused} onClick={onPausedToggle}>
+             <button className="button is-rounded is-outlined is-success medium"
+                     disabled={!paused}
+                     onClick={onPausedToggle}>
                 Resume
             </button>
         </p>

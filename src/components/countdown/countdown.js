@@ -4,16 +4,11 @@ import Controls from './controls'
 
 class Countdown extends Component {
 
-    constructor(props){
-        super(props)
-
-        this.state = {
+    state = {
             duration: this.getRemainingTime(),
             paused: false,
-           
         }
        
-    }
     // method to calculate the remaining time in a year
      getRemainingTime() {
         let now = moment(),
@@ -30,13 +25,9 @@ class Countdown extends Component {
             const paused = !prevState.paused
 
             if (paused) {
-                clearInterval(this.interval);
+                this.pause()
             } else {
-           this.interval = setInterval(() => {
-                    this.setState({
-                       duration: this.getRemainingTime()
-                    })
-                }, 1000)
+                this.resume()
             }
             return {
                 paused
@@ -45,21 +36,28 @@ class Countdown extends Component {
        
     }
 
-
     componentDidMount(){
-        this.interval = setInterval(() => {
-             this.setState({
-                duration: this.getRemainingTime()
-             })
-            }, 1000)
+       this.resume()
     }
+
     // disposing the interval when the component is being disposed 
     componentWillUnmount(){
-      clearInterval(this.interval);
+     this.pause()
     }
-   
 
+    // method to pause the timer
+    pause(){
+        clearInterval(this.interval);
+    }
 
+    // method to resume the timer
+    resume(){
+        this.interval = setInterval(() => {
+            this.setState({
+               duration: this.getRemainingTime()
+            })
+           }, 1000)
+    }
 
     render(){
         // destructuring duration from the state
@@ -78,25 +76,33 @@ class Countdown extends Component {
                                     <div className="level-item has-text-centered">
                                         <div>
                                             <p className="heading">Days</p>
-                                            <p className="title">{Math.floor(duration.asDays())}</p>
+                                            <p className="title">
+                                                {Math.floor(duration.asDays())}
+                                            </p>
                                         </div>
                                     </div>
                                     <div className="level-item has-text-centered">
                                         <div>
                                         <p className="heading">Hours</p>
-                                        <p className="title">{duration.hours().toString().padStart(2, '0')}</p>
+                                        <p className="title">
+                                            {duration.hours().toString().padStart(2, '0')}
+                                        </p>
                                         </div>
                                     </div>
                                     <div className="level-item has-text-centered">
                                         <div>
                                         <p className="heading">Minutes</p>
-                                        <p className="title">{duration.minutes().toString().padStart(2, '0')}</p>
+                                        <p className="title">
+                                            {duration.minutes().toString().padStart(2, '0')}
+                                        </p>
                                         </div>
                                     </div>
                                     <div className="level-item has-text-centered">
                                         <div>
                                         <p className="heading">Seconds</p>
-                                        <p className="title">{duration.seconds().toString().padStart(2, '0')}</p>
+                                        <p className="title">
+                                            {duration.seconds().toString().padStart(2, '0')}
+                                        </p>
                                         </div>
                                     </div>
                                 </nav>
