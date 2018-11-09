@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Timer from './timer'
 import Controls from './controls'
 import moment from 'moment'
+import Datepicker from './datepicker'
 
 export default class Countdown extends Component {
 
@@ -74,6 +75,7 @@ render() {
                     </h1>
                     <section className="section">
                         <Timer duration={duration}/>
+                        <Datepicker/>
                     </section>
                     <div>
                         <Controls paused={paused} onPausedToggle={this.handleTogglePaused}/>
