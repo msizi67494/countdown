@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
+import moment from 'moment'
 import Timer from './timer'
 import Controls from './controls'
-import moment from 'moment'
-import Datepicker from './datepicker'
+// import Datepicker from './datepicker'
 
 export default class Countdown extends Component {
 
@@ -39,12 +39,12 @@ handleTogglePaused = () => {
 }
 
 componentDidMount(){
-this.resume()
+    this.resume()
 }
 
 // disposing the interval when the component is being disposed 
 componentWillUnmount(){
-this.pause()
+    this.pause()
 }
 
 // method to pause the timer
@@ -56,7 +56,7 @@ pause(){
 resume(){
     this.interval = setInterval(() => {
         this.setState({
-        duration: this.getRemainingTime()
+            duration: this.getRemainingTime()
         })
     }, 1000)
 }
