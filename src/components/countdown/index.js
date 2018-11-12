@@ -75,7 +75,7 @@ render() {
                     </h1>
                     <section className="section">
                         <Timer duration={duration}/>
-                        <Datepicker/>
+                        {/* <Datepicker/> */}
                     </section>
                     <div>
                         <Controls paused={paused} onPausedToggle={this.handleTogglePaused}/>
